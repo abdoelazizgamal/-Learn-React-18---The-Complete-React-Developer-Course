@@ -6,8 +6,6 @@
 
 // console.log(MY_CONSTANT)
 
-
-
 // JavaScript  uses a way to define variables called "lexical variable scope". This means that when a variable is defined inside a block of code, like a function or a loop, it can only be accessed within that block and its nested blocks.
 // In JavaScript, we create code blocks with curly braces {}
 
@@ -29,13 +27,11 @@
 //   container.appendChild(div);
 // }
 
-
 // Function Declarations
 // logCompliment();
 // function logCompliment() {
 //   console.log("You're doing great!");
 // }
-
 
 // Function Expressions
 // console.log(logCompliment);
@@ -52,11 +48,9 @@
     4 - Execution => The engine executes the compiled code in the current execution context
  */
 
-
 // Hoisting in JavaScript is a term that refers to how variable declarations and function declarations are processed during the creation phase of the execution context.
 
 // execution context is an environment in which the code is executed and evaluated.
-
 
 // 4 - Execution => The engine executes the compiled code in the current execution context
 /*
@@ -77,11 +71,6 @@
 
     6 -Garbage Collection: As the code is executed, the engine may create and remove objects from memory. When an object is no longer referenced by any execution context, the engine marks it for garbage collection.
 */
-
-
-
-
-
 
 // Hoisting influences the variable life cycle, which consists of 3 steps:
 // Declaration - create a new variable. E.g. let myValue
@@ -110,7 +99,6 @@
 //   console.log("Hello!");
 // }
 
-
 // Passing arguments
 // let name = "zzz"
 // const person = { name: "abdoelaziz" };
@@ -122,14 +110,12 @@
 // logCompliment(person);
 // JavaScript sets the value of the parameters to undefined if they are not provided with a value during the function call.
 
-
 // ###################
 // Arrow Function
 // ######################
 // const greet = () => ({ name: "abdo", age: 24 });
 
 // console.log(greet());
-
 
 // ###################
 // Arrow Function Vs Regular Function
@@ -185,8 +171,109 @@
 // setTimeout(batman.logName, 1000);
 
 // 3 - new keyword
-const Car = color => {
-  this.color = color;
+// const Car = color => {
+//   this.color = color;
+// }
+// const redCar = new Car('red');
+// console.log(redCar instanceof Car); // => true
+
+// #####################################################
+// ################Template literals ########################
+// ################ template strings ########################
+// #####################################################
+
+/*
+
+1 - The template literal is enclosed in backticks (`) instead of single or double quotes.
+
+2 -The placeholders are denoted by the syntax "${expression}", where "expression" can be any valid JavaScript expression. =>  string interpolation 
+
+3 - The expressions inside the placeholders are evaluated and their values are inserted into the string.
+4 - They allow for multiline strings without the need for escape characters or line continuation characters.
+5 - The whitespace inside the string is preserved.
+6 - Tagged templates are a way to customize the behavior of template literals.
+
+*/
+// const name = "";
+// const age = 23;
+// console.log("My name is " + name + " and I am " + age + " years old.");
+// console.log("My name is ".concat(name, " and I am ", age, " years old."));
+// console.log("My name is %s and I am %d years old.", name, age);
+// console.log(
+//   `My name is ${name ? name : "user"} and I am ${age * 2} years old.`
+// );
+// console.log("Hello \n world");
+// console.log(`Hello                           world`);
+// ##############################################
+// ############### Tagged templates #################
+// ##############################################
+
+// function myTag(strings, ...values) {
+//   console.log(strings); // outputs an array of string literals
+//   console.log(values); // outputs an array of interpolated values
+// }
+
+// const myName = "ag";
+// const myAge = 23;
+
+// myTag`My name is ${myName} and I am ${myAge} years old.`;
+
+// ##############################################
+// ############### Objects and Arrays #################
+// ##############################################
+// const person = {
+//   name: "ag",
+//   age: 23,
+//   city: "Mansoura",
+//   hobbies: ["reading", "coding", "football"],
+//   job: "aaa",
+// };
+// console.log(person.name, person.age, person.city, person.hobbies);
+// const { name: personName, age, job: work = "front" } = person;
+// const name = "abdo";
+// console.log(personName, age, work);
+// function printPersonInfo(someone) {
+//   console.log(
+//     `${someone.name} is ${someone.age} years old and lives in ${someone.city}.`
+//   );
+// }
+// printPersonInfo(person);
+// function printPersonInfoDes({ name, age, city }) {
+//   console.log(`${name} is ${age} years old and lives in ${city}.`);
+// }
+
+// printPersonInfoDes(person);
+// const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+// const [firstNumber, , thirdNumber, ...rest] = numbers;
+// console.log(thirdNumber);
+// console.log(rest);
+// // numbers.reverse();
+// console.log([...numbers].reverse());
+// console.log(numbers);
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+const evenNumbers = [];
+for (let i = 0; i < numbers.length; i++) {
+  numbers[i] % 2 === 0 ? evenNumbers.push(numbers[i]) : null;
 }
-const redCar = new Car('red');
-console.log(redCar instanceof Car); // => true
+console.log(evenNumbers);
+const evenNumbersFor = [];
+numbers.forEach((currentValue, index, array) =>
+  currentValue % 2 === 0 ? evenNumbersFor.push(currentValue) : null
+);
+console.log(evenNumbersFor);
+// 1 0  numbers
+// 2 1  numbers
+const evenMap = numbers.map((currentValue) => {
+  return currentValue * 2;
+});
+const evenFilter = numbers.filter((currentValue) => {
+  return currentValue % 2 === 1;
+});
+const sum = numbers.reduce((accumulator, currentValue, index, array) => {
+  console.log(accumulator);
+  return accumulator * currentValue;
+}, 1);
+console.log(sum);
+// 0  1
+//1  2
+// 3 + 3
