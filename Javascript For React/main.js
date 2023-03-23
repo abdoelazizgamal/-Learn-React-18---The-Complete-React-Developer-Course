@@ -250,30 +250,112 @@
 // // numbers.reverse();
 // console.log([...numbers].reverse());
 // console.log(numbers);
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
-const evenNumbers = [];
-for (let i = 0; i < numbers.length; i++) {
-  numbers[i] % 2 === 0 ? evenNumbers.push(numbers[i]) : null;
-}
-console.log(evenNumbers);
-const evenNumbersFor = [];
-numbers.forEach((currentValue, index, array) =>
-  currentValue % 2 === 0 ? evenNumbersFor.push(currentValue) : null
-);
-console.log(evenNumbersFor);
-// 1 0  numbers
-// 2 1  numbers
-const evenMap = numbers.map((currentValue) => {
-  return currentValue * 2;
-});
-const evenFilter = numbers.filter((currentValue) => {
-  return currentValue % 2 === 1;
-});
-const sum = numbers.reduce((accumulator, currentValue, index, array) => {
-  console.log(accumulator);
-  return accumulator * currentValue;
-}, 1);
-console.log(sum);
+// const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+// const evenNumbers = [];
+// for (let i = 0; i < numbers.length; i++) {
+//   numbers[i] % 2 === 0 ? evenNumbers.push(numbers[i]) : null;
+// }
+// console.log(evenNumbers);
+// const evenNumbersFor = [];
+// numbers.forEach((currentValue, index, array) =>
+//   currentValue % 2 === 0 ? evenNumbersFor.push(currentValue) : null
+// );
+// console.log(evenNumbersFor);
+// // 1 0  numbers
+// // 2 1  numbers
+// const evenMap = numbers.map((currentValue) => {
+//   return currentValue * 2;
+// });
+// const evenFilter = numbers.filter((currentValue) => {
+//   return currentValue % 2 === 1;
+// });
+// const sum = numbers.reduce((accumulator, currentValue, index, array) => {
+//   console.log(accumulator);
+//   return accumulator * currentValue;
+// }, 1);
+// console.log(sum);
 // 0  1
 //1  2
 // 3 + 3
+/************************************************/
+// CallBacks //
+/************************************************/
+// const users = [
+//   { name: "John", age: 34 },
+//   { name: "Amy", age: 20 },
+// ];
+// const getUsers = () => {
+//   setTimeout(() => {
+//     let output = ``;
+//     users.forEach((user) => {
+//       output += `<li> ${user.name} is ${user.age} years old</li>`;
+//     });
+//     document.body.innerHTML = output;
+//   }, 1000);
+// };
+// const addUser = (user, callback) => {
+//   setTimeout(() => {
+//     users.push(user);
+//     callback();
+//   }, 2000);
+// };
+
+// addUser({ name: "Steve", age: 40 }, getUsers);
+/************************************************/
+// Promises //
+/************************************************/
+// const addUser = (user) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       users.push(user);
+//       const error = false;
+//       if (!error) {
+//         resolve(user);
+//       } else {
+//         reject("Error: Something went wrong!z");
+//       }
+//     }, 2000);
+//   });
+// };
+//   Pending: The initial state; the promise is neither fulfilled nor rejected.
+// Fulfilled: The operation completed successfully, and the promise has a resulting value.
+// Rejected: The operation failed, and the promise has a reason for the failure.
+// console.log(addUser({ name: "Steve", age: 40 }));
+
+// addUser({ name: "Steve", age: 40 })
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .then(getUsers)
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+/************************************************/
+// Async Await //
+/************************************************/
+//elegant way to handle promises
+// const init = async () => {
+//   await addUser({ name: "Steve", age: 40 });
+//   getUsers();
+// };
+// init();
+
+/************************************************/
+// Async Await  with fetch
+/************************************************/
+const fetchUsers = async () => {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
+    const userData = await res.json();
+    console.log(userData);
+    const posts = await fetch(
+      "https://jsonplaceholder.typicode.com/posts?userId=1"
+    );
+    const postsData = await posts.json();
+    console.log(postsData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+fetchUsers();
